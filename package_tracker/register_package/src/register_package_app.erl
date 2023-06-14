@@ -9,23 +9,27 @@
 
 -import(riak, [put_package/2]).
 
--ifdef(TEST).
+% -ifdef(TEST). 
 
--include_lib("eunit/include/eunit.hrl").
+% -include_lib("eunit/include/eunit.hrl").
 
--endif.
+% -endif.
 
--export([start/2, stop/1, register_package/5]).
+-export([start/2, stop/1, register_package/0]).
 
 
 start(_StartType, _StartArgs) ->
     register_package_sup:start_link().
 
-register_package(bucket, id, location, time, pid) ->
-    package_info = riakc_obj:new(bucket, <<id>>, {location, time}),
+% register_package(bucket, id, location, time, pid) ->
+%     package_info = riakc_obj:new(bucket, <<id>>, {location, time}),
+%     put_package(pid, package_info).
+
+register_package() ->
+    package_info = 2,
+    riakc_obj:new(bucket, <<id>>, {location, time}),
     put_package(pid, package_info).
     
-
 stop(_State) ->
     ok.
 
